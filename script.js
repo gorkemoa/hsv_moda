@@ -328,4 +328,93 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     
     document.head.appendChild(style);
+
+    // Slider işlevselliği
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.slider-arrow.prev');
+    const nextBtn = document.querySelector('.slider-arrow.next');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Slider görsellerinin boyutunu ayarlama
+    function resizeSliderImages() {
+        const sliderHeight = document.querySelector('.slider').offsetHeight;
+        const sliderWidth = document.querySelector('.slider').offsetWidth;
+        
+        slides.forEach(slide => {
+            const img = slide.querySelector('img');
+            if (img) {
+                // Görüntünün orijinal boyutlarını al
+                const imgRatio = img.naturalWidth / img.naturalHeight;
+                const containerRatio = sliderWidth / sliderHeight;
+                
+                // Görüntü container'dan daha genişse
+                if (imgRatio > containerRatio) {
+                    img.style.width = '100%';
+                    img.style.height = 'auto';
+                } else {
+                    img.style.height = '100%';
+                    img.style.width = 'auto';
+                }
+            }
+        });
+    }
+
+    // Sayfa yüklendiğinde ve yeniden boyutlandırıldığında görselleri ayarla
+    resizeSliderImages();
+    window.addEventListener('resize', resizeSliderImages);
+
+    // Slider otomatik geçiş fonksiyonu
+    function startSlideInterval() {
+        slideInterval = setInterval(() => {
+            goToSlide((currentSlide + 1) % slides.length);
+        }, 5000);
+    }
+
+    // Slider geçiş fonksiyonu
+    function goToSlide(index) {
+        if (slides.length) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+    }
+
+    // Slider kontrolleri
+    if (slides.length && dots.length) {
+        // Nokta ile geçiş
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                goToSlide(index);
+                startSlideInterval();
+            });
+        });
+
+        // Önceki/sonraki oklar
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                goToSlide((currentSlide - 1 + slides.length) % slides.length);
+                startSlideInterval();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                goToSlide((currentSlide + 1) % slides.length);
+                startSlideInterval();
+            });
+        }
+
+        // Slider başlat
+        startSlideInterval();
+    }
+
+    // CSS Animation on Mobile
+    // ... existing code ...
 }); 
