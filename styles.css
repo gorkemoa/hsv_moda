@@ -18,6 +18,8 @@
     --border-color: #e5e5e5;
     --transition: 0.3s ease;
     --spacing: 0.05em;
+    --elbise-color: #9e7bb5; /* Elbise kategorisi için özel renk */
+    --ayakkabi-color: #c17d5e; /* Topuklu ayakkabı kategorisi için özel renk */
 }
 
 body {
@@ -133,6 +135,41 @@ input {
     background: rgba(255, 255, 255, 0.3);
 }
 
+/* Özel Kategori Butonları */
+.btn-elbise {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--elbise-color);
+    color: var(--white);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--elbise-color);
+    transition: all var(--transition);
+}
+
+.btn-elbise:hover {
+    background: transparent;
+    color: var(--elbise-color);
+}
+
+.btn-ayakkabi {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--ayakkabi-color);
+    color: var(--white);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--ayakkabi-color);
+    transition: all var(--transition);
+}
+
+.btn-ayakkabi:hover {
+    background: transparent;
+    color: var(--ayakkabi-color);
+}
+
 /* Dil Seçici */
 .language-selector {
     position: relative;
@@ -219,6 +256,14 @@ input {
     margin-right: 30px;
 }
 
+.global-nav-categories li:first-child a:hover {
+    color: var(--elbise-color);
+}
+
+.global-nav-categories li:last-child a:hover {
+    color: var(--ayakkabi-color);
+}
+
 .global-nav-categories a {
     font-size: 12px;
     font-weight: 500;
@@ -230,6 +275,14 @@ input {
 
 .global-nav-categories a:hover {
     color: var(--gold);
+}
+
+.global-nav-categories li:first-child a:after {
+    background: var(--elbise-color);
+}
+
+.global-nav-categories li:last-child a:after {
+    background: var(--ayakkabi-color);
 }
 
 .global-nav-categories a:after {
@@ -448,6 +501,14 @@ input {
     letter-spacing: 0.1em;
 }
 
+.accordion-item:nth-child(1) .accordion-header {
+    color: var(--elbise-color);
+}
+
+.accordion-item:nth-child(2) .accordion-header {
+    color: var(--ayakkabi-color);
+}
+
 .accordion-content {
     display: none;
     padding: 0 0 15px;
@@ -629,32 +690,76 @@ input {
 
 /* Category Nav */
 .category-nav {
-    padding: 60px 0;
+    padding: 80px 0;
     background: var(--white);
 }
 
 .category-nav-inner {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 30px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
 }
 
 .category-link {
     text-align: center;
 }
 
+.featured-category {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.featured-category:hover {
+    transform: translateY(-10px);
+}
+
+.featured-category:first-child::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid var(--elbise-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.featured-category:first-child:hover::before {
+    opacity: 0.3;
+}
+
+.featured-category:last-child::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid var(--ayakkabi-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.featured-category:last-child:hover::before {
+    opacity: 0.3;
+}
+
 .category-image {
     position: relative;
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .category-image img {
     width: 100%;
-    height: 300px;
+    height: 450px;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
@@ -665,9 +770,18 @@ input {
 
 .category-link h3 {
     font-family: var(--primary-font);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.1em;
+    margin-top: 10px;
+}
+
+.featured-category:first-child h3 {
+    color: var(--elbise-color);
+}
+
+.featured-category:last-child h3 {
+    color: var(--ayakkabi-color);
 }
 
 /* Featured Product */
@@ -688,6 +802,7 @@ input {
 
 .featured-product-image {
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .featured-product-image img {
@@ -707,7 +822,7 @@ input {
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.1em;
-    color: var(--secondary-text);
+    color: var(--elbise-color);
     margin-bottom: 15px;
     display: block;
 }
@@ -744,12 +859,28 @@ input {
     padding: 100px 60px;
     max-width: 500px;
     margin-left: auto;
+    position: relative;
+}
+
+.collection-content::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--ayakkabi-color);
+    opacity: 0.3;
+    z-index: 0;
 }
 
 .collection-content h2 {
     font-size: 40px;
     margin-bottom: 20px;
     letter-spacing: 0.2em;
+    position: relative;
+    z-index: 1;
+    color: var(--ayakkabi-color);
 }
 
 .collection-content p {
@@ -757,6 +888,8 @@ input {
     line-height: 1.6;
     margin-bottom: 30px;
     opacity: 0.9;
+    position: relative;
+    z-index: 1;
 }
 
 .collection-image img {
@@ -782,12 +915,15 @@ input {
 
 .product-card {
     margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
 }
 
 .product-card-image {
     position: relative;
     overflow: hidden;
     margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .product-card-image img {
@@ -801,12 +937,20 @@ input {
     transform: scale(1.05);
 }
 
+.product-highlight-small:first-child .product-card-info h3 {
+    color: var(--elbise-color);
+}
+
+.product-highlight-small:last-child .product-card-info h3 {
+    color: var(--ayakkabi-color);
+}
+
 .product-card-info {
     text-align: center;
 }
 
 .product-card-info h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 5px;
     letter-spacing: 0.1em;
 }
@@ -1080,8 +1224,8 @@ footer {
     }
     
     .category-nav-inner {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
     
     .featured-product-grid {
@@ -1183,10 +1327,6 @@ footer {
 @media screen and (max-width: 500px) {
     .global-nav-logo a {
         font-size: 24px;
-    }
-    
-    .category-nav-inner {
-        grid-template-columns: 1fr;
     }
     
     .category-image img {
