@@ -126,52 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Bildirim gösterme fonksiyonu
-    function showNotification(message, type) {
-        // Eğer daha önce bildirim varsa kaldır
-        const existingNotification = document.querySelector('.notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
-        
-        // Yeni bildirim oluştur
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span>${message}</span>
-            </div>
-            <button class="close-notification"><i class="fas fa-times"></i></button>
-        `;
-        
-        // Bildirimi sayfaya ekle
-        document.body.appendChild(notification);
-        
-        // Bildirimi göster
-        setTimeout(() => {
-            notification.classList.add('show');
-        }, 10);
-        
-        // Bildirim kapatma düğmesi
-        const closeButton = notification.querySelector('.close-notification');
-        if (closeButton) {
-            closeButton.addEventListener('click', function() {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            });
-        }
-        
-        // Belirli bir süre sonra otomatik kapat
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, 5000);
-    }
+    // Ürün Galerisi İşlevleri
+    initProductGallery();
     
     // Sayfa yüklendiğinde CSS animasyonları ekle
     const style = document.createElement('style');
@@ -261,4 +217,93 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     
     document.head.appendChild(style);
-}); 
+});
+
+function initProductGallery() {
+    const galleryMain = document.querySelector('.gallery-main');
+    if (!galleryMain) return; // Eğer galeri yoksa işlem yapma
+    
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const prevButton = document.querySelector('.gallery-prev');
+    const nextButton = document.querySelector('.gallery-next');
+    
+    let currentIndex = 0;
+    
+    // Thumbnail tıklama işlevleri
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', () => {
+            setActiveImage(index);
+        });
+    });
+    
+    // İleri-geri butonları
+    if (prevButton && nextButton) {
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            setActiveImage(currentIndex);
+        });
+        
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            setActiveImage(currentIndex);
+        });
+    }
+    
+    // Aktif görüntüyü ayarlama fonksiyonu
+    function setActiveImage(index) {
+        galleryImages.forEach(img => img.classList.remove('active'));
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        
+        galleryImages[index].classList.add('active');
+        thumbnails[index].classList.add('active');
+        currentIndex = index;
+    }
+}
+
+// Bildirim gösterme fonksiyonu
+function showNotification(message, type) {
+    // Eğer daha önce bildirim varsa kaldır
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Yeni bildirim oluştur
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+        <button class="close-notification"><i class="fas fa-times"></i></button>
+    `;
+    
+    // Bildirimi sayfaya ekle
+    document.body.appendChild(notification);
+    
+    // Bildirimi göster
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Bildirim kapatma düğmesi
+    const closeButton = notification.querySelector('.close-notification');
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        });
+    }
+    
+    // Belirli bir süre sonra otomatik kapat
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 5000);
+} 

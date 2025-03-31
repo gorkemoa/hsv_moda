@@ -49,25 +49,66 @@
     gap: 60px;
 }
 
-/* Ürün Galerisi */
+/* Zarif Elbise Sayfası için Ürün Galerisi */
 .product-gallery {
-    position: relative;
-}
-
-.main-image {
-    margin-bottom: 20px;
-    background-color: var(--light-bg);
-    position: relative;
-}
-
-.main-image img {
+    margin-bottom: 60px;
     width: 100%;
-    max-height: 700px;
-    object-fit: contain;
-    display: block;
+    position: relative;
 }
 
-.thumbnail-images {
+.gallery-main {
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: var(--light-bg);
+}
+
+.gallery-image-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+.gallery-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.gallery-image.active {
+    opacity: 1;
+}
+
+.gallery-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.gallery-prev,
+.gallery-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.gallery-prev:hover,
+.gallery-next:hover {
+    background-color: var(--white);
+}
+
+.gallery-thumbnails {
     display: flex;
     gap: 10px;
 }
@@ -81,7 +122,8 @@
     transition: all var(--transition);
 }
 
-.thumbnail:hover, .thumbnail.active {
+.thumbnail:hover, 
+.thumbnail.active {
     opacity: 1;
     border-color: var(--black);
 }
