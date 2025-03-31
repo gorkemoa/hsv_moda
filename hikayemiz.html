@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hikayemiz | HSV Özel Tasarım Moda</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .story-hero {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+        
+        .story-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .story-hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20%;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--white);
+        }
+        
+        .story-hero-content h1 {
+            font-family: var(--secondary-font);
+            font-size: 60px;
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+        }
+        
+        .story-hero-content p {
+            font-size: 18px;
+            max-width: 800px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .story-section {
+            padding: 100px 0;
+        }
+        
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .story-row {
+            display: flex;
+            margin-bottom: 100px;
+        }
+        
+        .story-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .story-image {
+            flex: 1;
+            padding: 0 30px;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .story-text {
+            flex: 1;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .story-text h2 {
+            font-family: var(--secondary-font);
+            font-size: 36px;
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+        }
+        
+        .story-text p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .craftmanship-section {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .craftmanship-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .craftmanship-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .craftmanship-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .craftmanship-item h3 {
+            font-family: var(--secondary-font);
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+        }
+        
+        .craftmanship-item p {
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .timeline-section {
+            padding: 100px 0;
+        }
+        
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-header h2 {
+            font-family: var(--secondary-font);
+            font-size: 36px;
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+        }
+        
+        .timeline-header p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--border-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-content {
+            position: relative;
+            width: calc(50% - 40px);
+            padding: 30px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -50px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -50px;
+        }
+        
+        .timeline-date {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .timeline-content h3 {
+            font-family: var(--secondary-font);
+            font-size: 22px;
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
+        }
+        
+        .timeline-content p {
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        @media screen and (max-width: 1068px) {
+            .story-hero-content h1 {
+                font-size: 48px;
+            }
+            
+            .story-hero-content p {
+                font-size: 16px;
+            }
+            
+            .story-text h2 {
+                font-size: 30px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .story-hero {
+                height: 500px;
+            }
+            
+            .story-hero-content {
+                padding: 0 10%;
+            }
+            
+            .story-hero-content h1 {
+                font-size: 38px;
+            }
+            
+            .story-row {
+                flex-direction: column;
+                margin-bottom: 60px;
+            }
+            
+            .story-row:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .story-image, .story-text {
+                flex: auto;
+                padding: 0;
+                margin-bottom: 30px;
+            }
+            
+            .craftmanship-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -50px;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <div class="language-selector-content">
+            <span>Türkçe</span>
+            <i class="fas fa-chevron-down"></i>
+            <div class="language-dropdown">
+                <a href="#">English</a>
+                <a href="#">Français</a>
+                <a href="#">Italiano</a>
+                <a href="#">Deutsch</a>
+                <a href="#">日本語</a>
+                <a href="#">한국어</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="nav-wrapper">
+        <nav class="global-nav">
+            <div class="global-nav-content">
+                <div class="global-nav-categories">
+                    <ul>
+                        <li><a href="#">ÖZEL TASARIM ELBİSE</a></li>
+                        <li><a href="#">ÖZEL TASARIM TOPUKLU AYAKKABI</a></li>
+                    </ul>
+                </div>
+                <div class="global-nav-logo">
+                    <a href="index.html">HSV</a>
+                </div>
+                <div class="global-nav-actions">
+                    <a href="#" class="search-link"><i class="fas fa-search"></i></a>
+                    <a href="#" class="account-link"><i class="fas fa-user"></i></a>
+                    <a href="#" class="wishlist-link"><i class="fas fa-heart"></i></a>
+                    <a href="#" class="bag-link"><i class="fas fa-shopping-bag"></i></a>
+                    <a href="#" class="nav-menu-button">
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="mega-menu">
+            <div class="mega-menu-container">
+                <div class="mega-menu-column">
+                    <h3>ELBİSE KOLEKSİYONLARI</h3>
+                    <ul>
+                        <li><a href="#">Yeni Koleksiyon</a></li>
+                        <li><a href="#">İlkbahar-Yaz 2025</a></li>
+                        <li><a href="#">Gece Elbiseleri</a></li>
+                        <li><a href="#">Kokteyl Elbiseleri</a></li>
+                        <li><a href="#">Günlük Elbiseler</a></li>
+                        <li><a href="#">Mini Elbiseler</a></li>
+                        <li><a href="#">Midi Elbiseler</a></li>
+                        <li><a href="#">Maxi Elbiseler</a></li>
+                    </ul>
+                </div>
+                <div class="mega-menu-column">
+                    <h3>ELBİSE KUMAŞLARI</h3>
+                    <ul>
+                        <li><a href="#">İpek</a></li>
+                        <li><a href="#">Saten</a></li>
+                        <li><a href="#">Kadife</a></li>
+                        <li><a href="#">Şifon</a></li>
+                        <li><a href="#">Tül</a></li>
+                        <li><a href="#">Dantel</a></li>
+                        <li><a href="#">Krep</a></li>
+                    </ul>
+                </div>
+                <div class="mega-menu-column">
+                    <h3>AYAKKABI KOLEKSİYONLARI</h3>
+                    <ul>
+                        <li><a href="#">Yeni Koleksiyon</a></li>
+                        <li><a href="#">İlkbahar-Yaz 2025</a></li>
+                        <li><a href="#">Stiletto</a></li>
+                        <li><a href="#">Platformlu</a></li>
+                        <li><a href="#">Blok Topuklu</a></li>
+                        <li><a href="#">İnce Topuklu</a></li>
+                        <li><a href="#">Kalın Topuklu</a></li>
+                    </ul>
+                </div>
+                <div class="mega-menu-column">
+                    <h3>AYAKKABI MALZEMELERI</h3>
+                    <ul>
+                        <li><a href="#">Süet</a></li>
+                        <li><a href="#">Deri</a></li>
+                        <li><a href="#">Rugan</a></li>
+                        <li><a href="#">Saten</a></li>
+                        <li><a href="#">Dokuma</a></li>
+                        <li><a href="#">Nakışlı</a></li>
+                        <li><a href="#">Taşlı</a></li>
+                    </ul>
+                </div>
+                <div class="mega-menu-image">
+                    <img src="img/yazısız hali/ChatGPT Image 31 Mar 2025 01_52_26.png" alt="Sezon Koleksiyonu">
+                    <div class="mega-menu-image-text">
+                        <h4>2025 İLKBAHAR-YAZ</h4>
+                        <a href="#">Koleksiyonu Keşfedin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-nav">
+            <div class="mobile-nav-header">
+                <div class="mobile-nav-logo">HSV</div>
+                <button class="close-menu"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="mobile-nav-accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">ÖZEL TASARIM ELBİSE <i class="fas fa-plus"></i></div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><a href="#">Yeni Koleksiyon</a></li>
+                            <li><a href="#">Gece Elbiseleri</a></li>
+                            <li><a href="#">Kokteyl Elbiseleri</a></li>
+                            <li><a href="#">Günlük Elbiseler</a></li>
+                            <li><a href="#">İpek & Saten</a></li>
+                            <li><a href="#">Dantel & Tül</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">ÖZEL TASARIM TOPUKLU AYAKKABI <i class="fas fa-plus"></i></div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><a href="#">Yeni Koleksiyon</a></li>
+                            <li><a href="#">Stiletto</a></li>
+                            <li><a href="#">Platformlu</a></li>
+                            <li><a href="#">Blok Topuklu</a></li>
+                            <li><a href="#">Deri & Süet</a></li>
+                            <li><a href="#">Saten & Taşlı</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">HSV DÜNYASI <i class="fas fa-plus"></i></div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><a href="hikayemiz.html">Marka Hikayesi</a></li>
+                            <li><a href="#">Sanat & Tasarım</a></li>
+                            <li><a href="#">Sürdürülebilirlik</a></li>
+                            <li><a href="#">HSV Studio</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-nav-footer">
+                <div class="mobile-nav-contact">
+                    <p>Müşteri Hizmetleri: +90 212 123 45 67</p>
+                    <p>Pazartesi-Cumartesi: 10:00-19:00</p>
+                </div>
+                <div class="mobile-nav-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="search-overlay">
+            <div class="search-form-wrapper">
+                <form class="search-form">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Arama yapın">
+                    </div>
+                    <button class="close-search"><i class="fas fa-times"></i></button>
+                </form>
+                <div class="quick-links">
+                    <h3>Popüler Aramalar</h3>
+                    <ul>
+                        <li><a href="#">Yeni Koleksiyon</a></li>
+                        <li><a href="#">Gece Elbiseleri</a></li>
+                        <li><a href="#">Stiletto</a></li>
+                        <li><a href="#">İpek Elbiseler</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="story-hero">
+            <img src="img/yazısız hali/ChatGPT Image 31 Mar 2025 02_03_04.png" alt="HSV Atölye">
+            <div class="story-hero-content">
+                <h1>HİKAYEMİZ</h1>
+                <p>Lüks moda dünyasında yeni bir soluk olmak üzere çıktığımız bu yolculukta, zanaatkârlık geleneğiyle modern tasarım anlayışını birleştirerek her bir parçada mükemmelliği arıyoruz.</p>
+            </div>
+        </section>
+
+        <section class="story-section">
+            <div class="story-container">
+                <div class="story-row">
+                    <div class="story-image">
+                        <img src="img/yazısız hali/ChatGPT Image 31 Mar 2025 01_52_26.png" alt="HSV Kuruluş">
+                    </div>
+                    <div class="story-text">
+                        <h2>BAŞLANGIÇ HİKAYEMİZ</h2>
+                        <p>HSV, 2020 yılında İstanbul'da Hande Sarı tarafından bir tutkuyla kuruldu. Moda tasarımı eğitimi alan ve yıllarca uluslararası lüks moda evlerinde deneyim kazanan Hande, Türk kadınının zarafetini ve özgünlüğünü yansıtan özel tasarımlar yaratma hayaliyle kendi markasını hayata geçirdi.</p>
+                        <p>Küçük bir atölyede sınırlı sayıda parçayla başlayan marka, kısa sürede benzersiz tasarımları, kaliteli malzemeleri ve kusursuz işçiliğiyle dikkat çekti. Her bir HSV parçası, Hande'nin kreatif vizyonu ve ustaların el işçiliğiyle, modern kadının şıklığını ve özgüvenini yansıtacak şekilde tasarlanır.</p>
+                    </div>
+                </div>
+                
+                <div class="story-row">
+                    <div class="story-image">
+                        <img src="img/yazısız hali/Generated Image March 31, 2025 - 1_43AM.jpeg" alt="HSV Felsefe">
+                    </div>
+                    <div class="story-text">
+                        <h2>TASARIM FELSEFEMİZ</h2>
+                        <p>HSV'nin tasarım felsefesinin özünde zamansızlık, kalite ve özgünlük yer alır. Sezonların ötesinde, kullanıcısına uzun yıllar keyif verecek parçalar tasarlarken akım endişesini bir kenara bırakıp, kadının doğal güzelliğini ve karakterini öne çıkaran bir yaklaşım benimsiyoruz.</p>
+                        <p>Geleneksel el sanatlarımızdan ilham alırken, çağdaş çizgilerle buluşan tasarımlarımızda yerel zanaatkârlığın izlerini taşıyoruz. Her bir dikiş, her bir kesim ve her bir detay, bir sanat eserinin titizliğiyle ele alınır ve bu da HSV'yi basit bir elbise veya ayakkabıdan öte, bir yaşam tarzı ifadesine dönüştürür.</p>
+                    </div>
+                </div>
+                
+                <div class="story-row">
+                    <div class="story-image">
+                        <img src="img/yazısız hali/ChatGPT Image 31 Mar 2025 01_59_22.png" alt="HSV Atölye">
+                    </div>
+                    <div class="story-text">
+                        <h2>USTA ELLERİN MARİFETİ</h2>
+                        <p>İstanbul'un kalbindeki atölyelerimizde, tecrübeli ustalarımız ve yetenekli zanaatkârlarımız her bir HSV parçasını hayata geçirmek için emek harcar. Geleneksel teknikleri modern yaklaşımlarla birleştiren ekibimiz, yüksek kalite standartlarıyla çalışır.</p>
+                        <p>El işçiliği ve detaylara gösterilen özen, HSV'nin vazgeçilmez değerlerindendir. İpekli kumaşların seçiminden, elbiselerin dikilmesine; ayakkabı kalıplarının hazırlanmasından, deri işlemesine kadar her aşamada uzmanlaşmış ellerden çıkan ürünlerimiz, gerçek bir zanaatkârlık hikâyesi taşır.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="craftmanship-section">
+            <div class="craftmanship-grid">
+                <div class="craftmanship-item">
+                    <div class="craftmanship-icon"><i class="fas fa-gem"></i></div>
+                    <h3>KALİTE</h3>
+                    <p>Sadece en kaliteli malzemeleri kullanarak, uzun ömürlü ve mükemmel yapıda parçalar oluşturuyoruz. İpekten deri seçimine kadar her malzeme özenle seçilir ve test edilir.</p>
+                </div>
+                <div class="craftmanship-item">
+                    <div class="craftmanship-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>TASARIM</h3>
+                    <p>Özgün ve modern tasarımlarımız, geleneksel sanatlardan ilham alır ve çağdaş estetikle buluşur. Her koleksiyon, güçlü bir hikaye ve ilham kaynağını yansıtır.</p>
+                </div>
+                <div class="craftmanship-item">
+                    <div class="craftmanship-icon"><i class="fas fa-hands"></i></div>
+                    <h3>ZANAAT</h3>
+                    <p>Yıllarca eğitim almış ustalarımız, her bir parçaya ruh katarak el işçiliğinin sihirli dokunuşuyla tasarımları hayata geçirir. Bu emek, her ürünümüze benzersiz bir karakter kazandırır.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <div class="timeline-container">
+                <div class="timeline-header">
+                    <h2>YOLCULUĞUMUZ</h2>
+                    <p>HSV'nin kuruluşundan bugüne, ilk adımlardan önemli dönüm noktalarına kadar uzanan hikâyemiz...</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2020</div>
+                            <h3>MARKANIN KURULUŞU</h3>
+                            <p>HSV, İstanbul'da kuruldu ve ilk özel tasarım elbise koleksiyonunu sınırlı sayıda üretti.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2021</div>
+                            <h3>İLK MAĞAZA</h3>
+                            <p>Nişantaşı'ndaki ilk butik mağazamızı açtık ve özel dikim hizmetlerimizi sunmaya başladık.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2022</div>
+                            <h3>AYAKKABI KOLEKSİYONU</h3>
+                            <p>Özel tasarım topuklu ayakkabı koleksiyonumuzu tanıttık ve tamamlayıcı aksesuarlar üretmeye başladık.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023</div>
+                            <h3>ULUSLARARASI AÇILIM</h3>
+                            <p>İlk uluslararası satış noktalarımız Paris ve Dubai'de açıldı, global pazarda bilinirliğimiz arttı.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <h3>YENİ STÜDYO</h3>
+                            <p>Daha geniş bir üretim kapasitesi için yeni tasarım stüdyomuzu ve atölyemizi açtık.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2025</div>
+                            <h3>BUGÜN</h3>
+                            <p>Geleneksel zanaatkârlık ve modern tasarımı birleştiren özgün vizyonumuzla büyümeye devam ediyoruz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-top">
+                <div class="footer-logo">HSV</div>
+                <div class="footer-newsletter">
+                    <h4>Bizden Haberdar Olun</h4>
+                    <p>En son koleksiyonlar ve özel tasarım ürünler hakkında bilgi alın.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="E-posta adresiniz">
+                        <button type="submit" class="btn-dark">Abone Olun</button>
+                    </form>
+                </div>
+                <div class="footer-social">
+                    <h4>Bizi Takip Edin</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h5>KOLEKSİYONLAR</h5>
+                    <ul>
+                        <li><a href="#">Özel Tasarım Elbiseler</a></li>
+                        <li><a href="#">Gece Elbiseleri</a></li>
+                        <li><a href="#">Günlük Elbiseler</a></li>
+                        <li><a href="#">Topuklu Ayakkabılar</a></li>
+                        <li><a href="#">Stiletto</a></li>
+                        <li><a href="#">Platform Topuklu</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h5>MÜŞTERİ HİZMETLERİ</h5>
+                    <ul>
+                        <li><a href="#">İletişim</a></li>
+                        <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="#">Sipariş Takibi</a></li>
+                        <li><a href="#">Gizlilik Politikası</a></li>
+                        <li><a href="#">Ödeme Seçenekleri</a></li>
+                        <li><a href="#">Showroom Randevusu</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h5>HSV DÜNYASI</h5>
+                    <ul>
+                        <li><a href="hikayemiz.html">Marka Hikayesi</a></li>
+                        <li><a href="#">Tasarımcılarımız</a></li>
+                        <li><a href="#">Sürdürülebilirlik</a></li>
+                        <li><a href="#">El İşçiliği</a></li>
+                        <li><a href="#">Kariyer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h5>ÖLÇÜ REHBERİ</h5>
+                    <ul>
+                        <li><a href="#">Elbise Ölçüleri</a></li>
+                        <li><a href="#">Ölçü Alma Kılavuzu</a></li>
+                        <li><a href="#">Ayakkabı Ölçüleri</a></li>
+                        <li><a href="#">Özel Siparişler</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>Copyright © 2025 HSV Özel Tasarım. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="footer-locale">
+                    <p>Türkiye</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
